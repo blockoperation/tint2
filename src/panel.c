@@ -270,7 +270,11 @@ void init_panel()
 
 		long event_mask = ExposureMask | ButtonPressMask | ButtonReleaseMask | ButtonMotionMask | PropertyChangeMask;
 		if (p->mouse_effects || p->g_task.tooltip_enabled || p->clock.area._get_tooltip_text ||
-		    (launcher_enabled && launcher_tooltip_enabled))
+		    (launcher_enabled && launcher_tooltip_enabled)
+#ifdef ENABLE_BATTERY
+		    || (battery_enabled && battery_tooltip_enabled)
+#endif
+		   )
 			event_mask |= PointerMotionMask | LeaveWindowMask;
 		if (panel_autohide)
 			event_mask |= LeaveWindowMask | EnterWindowMask;
